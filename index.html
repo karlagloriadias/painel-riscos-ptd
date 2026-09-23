@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel de Riscos - PTD MEC</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <header class="hero">
+        <h3>MINISTÉRIO DA EDUCAÇÃO</h3>
+
+        <h1>
+            Painel de Riscos do Plano de Transformação Digital do MEC
+        </h1>
+
+        <p>
+            CGGA • STIC • SEGAPE
+        </p>
+    </header>
+
+    <section class="cards">
+
+        <div class="card">
+            <span id="totalRiscos">0</span>
+            <small>Total de Riscos</small>
+        </div>
+
+        <div class="card critical">
+            <span id="criticos">0</span>
+            <small>Críticos</small>
+        </div>
+
+        <div class="card high">
+            <span id="elevados">0</span>
+            <small>Elevados</small>
+        </div>
+
+        <div class="card moderate">
+            <span id="moderados">0</span>
+            <small>Moderados</small>
+        </div>
+
+    </section>
+
+    <section class="toolbar">
+
+        <button onclick="mostrarCriticos()">
+            Filtrar Críticos
+        </button>
+
+        <button onclick="limparFiltro()">
+            Limpar Filtros
+        </button>
+
+        <input
+            id="searchBox"
+            type="text"
+            placeholder="Pesquisar risco..."
+            onkeyup="pesquisar()">
+    </section>
+
+    <section class="filtros-avancados">
+
+        <select
+            id="filtroSeveridade"
+            onchange="filtrarSeveridade()">
+
+            <option value="">
+                Todas as Severidades
+            </option>
+
+            <option value="Crítico">
+                Crítico
+            </option>
+
+            <option value="Elevado">
+                Elevado
+            </option>
+
+            <option value="Moderado">
+                Moderado
+            </option>
+
+        </select>
+
+        <select
+            id="filtroCategoria"
+            onchange="filtrarCategoria()">
+
+            <option value="">
+                Todas as Categorias
+            </option>
+
+        </select>
+
+    </section>
+
+    <section id="painelCriticos">
+
+        <h2>
+            ⚠ 7 Riscos Prioritários
+        </h2>
+
+        <p>
+            Riscos Críticos para Deliberação da Alta Gestão
+        </p>
+        <p>
+          Demandam planos de ação imediatos, alocação de orçamento prioritário e designação formal de gestores responsáveis pelo tratamento.  
+        </p>
+        <div id="listaCriticos"></div>
+
+    </section>
+
+    <section class="matrix-section">
+
+        <h2>
+            Matriz de Probabilidade × Impacto
+        </h2>
+
+        <div
+            id="riskMatrix"
+            class="matrix">
+        </div>
+
+    </section>
+
+    <section class="charts">
+
+        <div class="chart-card">
+            <h3>
+                Distribuição por Severidade
+            </h3>
+
+            <canvas id="severityChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>
+                Estratégias de Tratamento
+            </h3>
+
+            <canvas id="strategyChart"></canvas>
+        </div>
+
+    </section>
+
+    <section class="table-section">
+
+        <div class="table-header">
+
+            <h2>
+                Inventário Detalhado dos Riscos do PTD
+            <br>
+         <span style="font-size:16px; color:#808080; font-weight:normal;">
+                Clique em qualquer linha para ver a descrição detalhada do risco e o plano de ação de mitigação/eliminação.
+            </span>
+         </h2>
+            <span id="registroInfo"></span>
+
+        </div>
+
+        <table class="risk-table">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Risco</th>
+                    <th>Probabilidade</th>
+                    <th>Impacto</th>
+                    <th>Severidade</th>
+                    <th>Tratamento</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="riskTable"></tbody>
+
+        </table>
+
+    </section>
+
+    <div
+        id="modal"
+        class="modal">
+
+        <div class="modal-content">
+
+            <span
+                class="close"
+                onclick="fecharModal()">
+                &times;
+            </span>
+
+            <div id="riskDetails"></div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+
+        <p>
+            Coordenação-Geral de Governança e Arquitetura (CGGA)
+        </p>
+
+        <p>
+            Subsecretaria de Tecnologia da Informação e Comunicações (STIC)
+        </p>
+
+        <p>
+            Painel baseado no Inventário de Riscos do Plano de Transformação Digital do MEC - PTD/MEC - 2026.
+        </p>
+
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
