@@ -1,7 +1,5 @@
 console.log("APP INICIOU");
 
-alert("app.js carregou");
-
 const riscos = [
 {
 id:"RPTD_001",
